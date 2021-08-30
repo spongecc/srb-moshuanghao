@@ -1,7 +1,12 @@
 package com.mosh.srb.core.service;
 
+import com.mosh.srb.core.pojo.dto.ExcelDictDTO;
 import com.mosh.srb.core.pojo.entity.Dict;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DictService extends IService<Dict> {
 
+    void importData(InputStream inputStream);
+
+    List<ExcelDictDTO> listDictData();
+
+    List<Dict> listByParentId(Long parentId);
 }

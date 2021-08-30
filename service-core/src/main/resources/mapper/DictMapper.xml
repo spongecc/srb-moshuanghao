@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mosh.srb.core.mapper.DictMapper">
 
+    <insert id="insertBatch">
+        insert into dict (
+            id ,
+            parent_id ,
+            name ,
+            value ,
+            dict_code
+        ) values
+        <foreach collection="list" item="dict" index="index" separator=",">
+            (
+                #{dict.id} ,
+                #{dict.parentId} ,
+                #{dict.name} ,
+                #{dict.value} ,
+                #{dict.dictCode}
+            )
+        </foreach>
+    </insert>
+
 </mapper>

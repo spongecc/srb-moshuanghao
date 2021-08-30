@@ -3,6 +3,8 @@ package com.mosh.srb.core.mapper;
 import com.mosh.srb.core.pojo.entity.Dict;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 数据字典 Mapper 接口
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface DictMapper extends BaseMapper<Dict> {
 
+    void insertBatch(List<Dict> list);
 }

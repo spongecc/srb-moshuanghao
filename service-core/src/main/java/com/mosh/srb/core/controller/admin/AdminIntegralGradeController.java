@@ -46,11 +46,11 @@ public class AdminIntegralGradeController {
     }
 
     @ApiOperation("保存积分等级")
-    @PutMapping("/save")
+    @PostMapping("/save")
     public R save(@ApiParam("积分对象") @RequestBody IntegralGrade integralGrade){
         //断言，如果借款额度大于0，不执行isTrue
         Assert.isTrue(integralGrade.getBorrowAmount().intValue()>0,ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
-
+        Assert.notNull(integralGrade.getBorrowAmount(),ResponseEnum.BORROW_AMOUNT_NULL_ERROR);
         boolean save = integralGradeService.save(integralGrade);
 
         Assert.isTrue(save,ResponseEnum.ERROR);
@@ -59,7 +59,7 @@ public class AdminIntegralGradeController {
     }
 
     @ApiOperation("删除积分等级")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/remove/{id}")
     public R delete(@ApiParam("积分等级ID") @PathVariable Long id){
         boolean b = integralGradeService.removeById(id);
         Assert.isTrue(b,ResponseEnum.ERROR);
@@ -67,10 +67,10 @@ public class AdminIntegralGradeController {
     }
 
     @ApiOperation("更新积分等级")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public R update(@ApiParam("积分对象") @RequestBody IntegralGrade integralGrade){
         boolean b = integralGradeService.updateById(integralGrade);
         Assert.isTrue(b,ResponseEnum.ERROR);
-        return R.error().message("修改失败");
+        return R.ok().message("修改成功");
     }
 }

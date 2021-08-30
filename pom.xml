@@ -7,7 +7,6 @@
         <module>srb-common</module>
         <module>service-base</module>
         <module>service-core</module>
-        <module>service-admin</module>
     </modules>
 
     <parent>
