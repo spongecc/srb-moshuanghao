@@ -1,15 +1,12 @@
 server:
   port: 8130
 
-#  用户登录名称 moshuanghao@1445246487174597.onaliyun.com
-#  AccessKey ID LTAI5tQvbgBTVjRVkdjURZX8
-#  AccessKey Secret OcmPZF7c3q1aykHLjYLPpAbeQGdeSx
 aliyun:
   oss:
-    endpoint: oss-cn-shenzhen
-    keyId: LTAI5tQvbgBTVjRVkdjURZX8
-    keySecret: OcmPZF7c3q1aykHLjYLPpAbeQGdeSx
-    bucketName: srb-mosh
+    endpoint: 
+    keyId: 
+    keySecret: 
+    bucketName: 
 spring:
   application:
     name: service.oss
