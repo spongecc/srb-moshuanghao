@@ -1,0 +1,37 @@
+server:
+  port: 8120
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-sms
+  redis:
+    host: 192.168.43.100
+    port: 6379
+    database: 0
+    timeout: 3000ms
+    jedis:
+      pool:
+        max-active: 20  #最大连接数，负值表示没有限制，默认8
+        max-wait: -1    #最大阻塞等待时间，负值表示没限制，默认-1
+        max-idle: 8     #最大空闲连接，默认8
+        min-idle: 0     #最小空闲连接，默认0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.43.100:8848 # 配置nacos服务器的IP和端口
+    sentinel:
+      transport:
+        dashboard: 192.168.43.100:8080
+# 开启Feign对Sentinel的支持
+feign:
+  sentinel:
+    enabled: true
+#阿里云短信
+aliyun:
+  sms:
+    region-id: cn-hangzhou
+    key-id: LTAI5tFBBinGNn6d26MJiMY2
+    key-secret: 3Jg74kevslR9crFIbbV9wa8zUvA1ne
+    template-code: SMS_217425770
+    sign-name: 北京课时教育

@@ -7,6 +7,9 @@
         <module>srb-common</module>
         <module>service-base</module>
         <module>service-core</module>
+        <module>service-sms</module>
+        <module>service-oss</module>
+        <module>service-gateway</module>
     </modules>
 
     <parent>

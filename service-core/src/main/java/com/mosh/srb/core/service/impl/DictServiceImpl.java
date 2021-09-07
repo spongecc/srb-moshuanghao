@@ -2,22 +2,22 @@ package com.mosh.srb.core.service.impl;
 
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mosh.srb.core.listener.ExcelDictDTOListener;
+import com.mosh.srb.core.mapper.DictMapper;
 import com.mosh.srb.core.pojo.dto.ExcelDictDTO;
 import com.mosh.srb.core.pojo.entity.Dict;
-import com.mosh.srb.core.mapper.DictMapper;
 import com.mosh.srb.core.service.DictService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import javax.annotation.Resource;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -29,6 +29,9 @@ import java.util.List;
  */
 @Service
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Transactional(rollbackFor = {Exception.class})
     @Override
@@ -50,6 +53,20 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public List<Dict> listByParentId(Long parentId) {
+
+        List<Dict> dicts = new ArrayList<>();
+        //先查询redis缓存中是否存在数据
+        dicts = (List<Dict>) redisTemplate.opsForValue().get("srb:core:dictList:" + parentId);
+        // 如果缓存中没有值，则调用数据库查询，并存入redis缓存，设置过期时间5分钟
+        if (null == dicts) {
+            dicts = this.listByParentIdFromDb(parentId);
+            redisTemplate.opsForValue().set("srb:core:dictList:" + parentId, dicts, 5, TimeUnit.MINUTES);
+        }
+        // 如果有值，获取redis缓存中的数据并返回
+        return dicts;
+    }
+
+    private List<Dict> listByParentIdFromDb(Long parentId){
         QueryWrapper<Dict> dictQueryWrapper = new QueryWrapper<>();
         dictQueryWrapper.eq("parent_id",parentId);
         List<Dict> dictList = baseMapper.selectList(dictQueryWrapper);

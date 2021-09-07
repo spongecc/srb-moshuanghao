@@ -1,7 +1,6 @@
 package com.mosh.srb.core.controller.admin;
 
 import com.mosh.common.exception.Assert;
-import com.mosh.common.exception.BusinessException;
 import com.mosh.common.result.R;
 import com.mosh.common.result.ResponseEnum;
 import com.mosh.srb.core.pojo.entity.IntegralGrade;
@@ -9,10 +8,10 @@ import com.mosh.srb.core.service.IntegralGradeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -20,10 +19,11 @@ import java.util.List;
  * @version 1.0
  * @date 2021/8/25
  */
+//@CrossOrigin //通过gateway网关自动添加跨域配置
 @Api("积分等级管理")
-@CrossOrigin
 @RestController
 @RequestMapping("/admin/core/integralGrade")
+@Slf4j
 public class AdminIntegralGradeController {
     @Resource
     private IntegralGradeService integralGradeService;
