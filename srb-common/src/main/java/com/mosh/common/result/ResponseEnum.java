@@ -38,6 +38,7 @@ public enum ResponseEnum {
     LOGIN_PASSWORD_ERROR(209, "密码错误"),
     LOGIN_LOKED_ERROR(210, "用户被锁定"),
     LOGIN_AUTH_ERROR(-211, "未登录"),
+    BORROW_INFO_ERROR(-212, "借款人信息已存在"),
 
 
     USER_BIND_IDCARD_EXIST_ERROR(-301, "身份证号码已绑定"),
@@ -47,6 +48,7 @@ public enum ResponseEnum {
     LEND_INVEST_ERROR(305, "当前状态无法投标"),
     LEND_FULL_SCALE_ERROR(306, "已满标，无法投标"),
     NOT_SUFFICIENT_FUNDS_ERROR(307, "余额不足，请充值"),
+    HFB_SIGN_ERROR(308, "汇付宝签名验证失败"),
 
     PAY_UNIFIEDORDER_ERROR(401, "统一下单错误"),
 

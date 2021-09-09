@@ -10,12 +10,22 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author 莫双豪
  * @version 1.0
  * @date 2021/8/25
  */
 public class CreateCode {
+
+    @Test
+    public void a(){
+        String folder = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+        System.out.println("folder = " + folder);
+    }
+
 
     @Test
     public void test1() {

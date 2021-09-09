@@ -115,7 +115,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     @Override
     public IPage<UserInfo> listPage(Page<UserInfo> userInfoPage, UserInfoQuery userInfoQuery) {
         QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
-        if (null == userInfoQuery){
+        if (null == userInfoQuery.getMobile() && null == userInfoQuery.getStatus() && null == userInfoQuery.getUserType()){
             return baseMapper.selectPage(userInfoPage,null);
         }
 
