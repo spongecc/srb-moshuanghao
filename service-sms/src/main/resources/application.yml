@@ -30,8 +30,8 @@ feign:
 #阿里云短信
 aliyun:
   sms:
-    region-id: cn-hangzhou
-    key-id: LTAI5tFBBinGNn6d26MJiMY2
-    key-secret: 3Jg74kevslR9crFIbbV9wa8zUvA1ne
-    template-code: SMS_217425770
-    sign-name: 北京课时教育
+    region-id: 
+    key-id: 
+    key-secret: 
+    template-code: 
+    sign-name: 
