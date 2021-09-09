@@ -6,13 +6,13 @@ server:
 #  AccessKey Secret OcmPZF7c3q1aykHLjYLPpAbeQGdeSx
 aliyun:
   oss:
-    endpoint: oss-cn-shenzhen
+    endpoint: oss-cn-shenzhen.aliyuncs.com
     keyId: LTAI5tQvbgBTVjRVkdjURZX8
     keySecret: OcmPZF7c3q1aykHLjYLPpAbeQGdeSx
     bucketName: srb-mosh
 spring:
   application:
-    name: service.oss
+    name: service-oss
   cloud:
     nacos:
       discovery:

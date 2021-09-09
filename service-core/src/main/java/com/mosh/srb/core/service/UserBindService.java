@@ -2,6 +2,9 @@ package com.mosh.srb.core.service;
 
 import com.mosh.srb.core.pojo.entity.UserBind;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.mosh.srb.core.pojo.vo.UserBindVO;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserBindService extends IService<UserBind> {
 
+    String commitBindUser(UserBindVO userBindVO, Long userId);
+
+    void bindNotify(Map<String, Object> map);
 }

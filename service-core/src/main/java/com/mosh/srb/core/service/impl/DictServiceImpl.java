@@ -66,6 +66,43 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         return dicts;
     }
 
+    /**
+     * 前台下拉列表
+     * @return
+     */
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        QueryWrapper<Dict> dictQueryWrapper = new QueryWrapper<>();
+        dictQueryWrapper.eq("dict_code",dictCode);
+        Dict dict = baseMapper.selectOne(dictQueryWrapper);
+        List<Dict> dicts = this.listByParentIdFromDb(dict.getId());
+        return dicts;
+    }
+
+    @Override
+    public String getNameByParentDictCodeAndValue(String dictCode, Integer value) {
+        QueryWrapper<Dict> dictQueryWrapper = new QueryWrapper<>();
+        dictQueryWrapper.eq("dict_code",dictCode);
+
+        Dict parentDict = baseMapper.selectOne(dictQueryWrapper);
+
+        if (null == parentDict){
+            return "";
+        }
+
+        dictQueryWrapper = new QueryWrapper<>();
+        dictQueryWrapper
+                .eq("parent_id",parentDict.getId())
+                .eq("value",value);
+        Dict dict = baseMapper.selectOne(dictQueryWrapper);
+
+        if (null == dict){
+            return null;
+        }
+
+        return dict.getName();
+    }
+
     private List<Dict> listByParentIdFromDb(Long parentId){
         QueryWrapper<Dict> dictQueryWrapper = new QueryWrapper<>();
         dictQueryWrapper.eq("parent_id",parentId);
